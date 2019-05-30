@@ -1,0 +1,2 @@
+rm fullSearch.zip
+zip fullSearch.zip config.* *py  LICENSE *.md zipping --exclude \*~ \*zip
