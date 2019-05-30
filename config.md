@@ -1,0 +1,1 @@
+"full search": if true, the note's search field will contains every field, otherwise it will behave as normal anki.
