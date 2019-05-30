@@ -1,10 +1,10 @@
 # Search in all fields
 ## Rationale
-One strange limitation of anki is that searching some text in the
-browser sometime fails. More precisely, it fails when a part of the
-string/word contains some formatting (bold, italic,
+One strange limitation of anki is that searching in formatted text
+sometime fails. More precisely, it fails when only a part of the
+searched word or sentence contains some formatting (bold, italic,
 underline...). Unless the word searched is in the «search field», in
-which case the search succeed.
+which case the search succeeds.
 
 This add-on's allow to search in any field as in the search
 field. There is a cost, the search column of the browser will contains
@@ -45,5 +45,5 @@ Key         |Value
 Copyright   | Arthur Milchior <arthur@milchior.fr>
 Based on    | Anki code by Damien Elmes <anki@ichi2.net>
 License     | GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
-Source in   | https://github.com/Arthur-Milchior/anki-
-Addon number| [???????](https://ankiweb.net/shared/info/???????)
+Source in   | https://github.com/Arthur-Milchior/anki-full-search
+Addon number| [1126516755](https://ankiweb.net/shared/info/1126516755)

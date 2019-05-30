@@ -1,0 +1,6 @@
+One strange limitation of anki is that searching in formatted text sometime fails. More precisely, it fails when only a part of the searched word or sentence contains some formatting (bold, italic, underline...). Unless the word searched is in the «search field», in which case the search succeeds.
+
+This add-on's allow to search in any field as in the search field. There is a cost, the search column of the browser will contains extra data. It means that you'll be able to use full search in ankidroid, and probably in IOS.
+
+
+To report bug, and for more details, please go to https://github.com/Arthur-Milchior/anki-full-search
