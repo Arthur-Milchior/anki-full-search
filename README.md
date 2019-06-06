@@ -1,5 +1,6 @@
 # Search in all fields
 ## Rationale
+
 One strange limitation of anki is that searching in formatted text
 sometime fails. More precisely, it fails when only a part of the
 searched word or sentence contains some formatting (bold, italic,
@@ -7,9 +8,10 @@ underline...). Unless the word searched is in the «search field», in
 which case the search succeeds.
 
 This add-on's allow to search in any field as in the search
-field. There is a cost, the search column of the browser will contains
-extra data. It means that you'll be able to use full search in
-ankidroid, and probably in IOS.
+field.
+
+This add-on also allows you to save space in your collection if you
+never sort your card by search field.
 
 ## Usage
 * Tools>Full search: this should be used after you install the
@@ -24,6 +26,12 @@ will takes more bandwidth. Note however that it don't become extremly
 bigger. My current collection used to be 116M without this add-on and
 became 121M with it.
 
+## Configuration:
+The principal configuration option is "sort field". When it is set to
+`false`, you won't be able to sort by "sort field" in the browser, and
+it'll reduce the size of your collection.
+
+For the two other options, see [config.md](config.md)
 
 ## Technical
 The sort field column of the browser will now contains, in this order:
@@ -47,3 +55,4 @@ Based on    | Anki code by Damien Elmes <anki@ichi2.net>
 License     | GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 Source in   | https://github.com/Arthur-Milchior/anki-full-search
 Addon number| [1126516755](https://ankiweb.net/shared/info/1126516755)
+Support me on| [![Ko-fi](https://ko-fi.com/img/Kofi_Logo_Blue.svg)](Ko-fi.com/arthurmilchior) or [![Patreon](http://www.milchior.fr/patreon.png)](https://www.patreon.com/bePatron?u=146206)
