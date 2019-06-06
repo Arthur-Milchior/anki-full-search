@@ -1,3 +1,5 @@
 {
-    "full search": true
+  "full search": true,
+  "sort field": true,
+  "default": false
 }
