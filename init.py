@@ -5,24 +5,28 @@ from anki.utils import stripHTMLMedia, intTime
 
 oldFlush = Note.flush
 
+
 def flush(note, mod=None):
     oldFlush(note, mod)
     if not getUserOption("default", False):
-        allSearch(note, mod = mod)
+        allSearch(note, mod=mod)
 
-def normalSearch(note, mod = None):
+
+def normalSearch(note, mod=None):
     model = note._model
     sortIdx = note.col.models.sortIdx(model)
     fields = note.fields[sortIdx]
     sfld = stripHTMLMedia(note.fields[note.col.models.sortIdx(note._model)])
     changeSfield(note, sfld, mod)
 
+
 def applyAllNote(fun):
     for nid in mw.col.db.list("select id from notes"):
-        note = Note(mw.col, id = nid)
+        note = Note(mw.col, id=nid)
         fun(note)
 
-def allSearch(note, mod = None):
+
+def allSearch(note, mod=None):
     model = note._model
     sortIdx = note.col.models.sortIdx(model)
     fields = note.fields
@@ -38,12 +42,13 @@ def allSearch(note, mod = None):
     sfield = " ".join(sfields)
     changeSfield(note, sfield, mod)
 
-def changeSfield(note, sfld, mod = None):
+
+def changeSfield(note, sfld, mod=None):
     col = note.col
     usn = note.col.usn()
     mod = mod if mod else intTime()
-    col.db.execute("""update notes set sfld = ?, mod = ? where id = ?""", sfld, mod, note.id)
-
+    col.db.execute(
+        """update notes set sfld = ?, mod = ? where id = ?""", sfld, mod, note.id)
 
 
 Note.flush = flush
