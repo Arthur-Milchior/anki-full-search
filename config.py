@@ -1,10 +1,12 @@
-from aqt import mw
 import sys
+
+from aqt import mw
 
 userOption = None
 
-def getUserOption(key = None, default = None):
-    #print(f"getUserOption(key = {key}, default = {default})")
+
+def getUserOption(key=None, default=None):
+    # print(f"getUserOption(key = {key}, default = {default})")
     global userOption
     if userOption is None:
         userOption = mw.addonManager.getConfig(__name__)
@@ -19,21 +21,26 @@ def getUserOption(key = None, default = None):
         #debug("key not in userOption. Returning default.")
         return default
 
+
 def writeConfig():
-    mw.addonManager.writeConfig(__name__,userOption)
+    mw.addonManager.writeConfig(__name__, userOption)
+
 
 def update(_):
     global userOption, fromName
     userOption = None
     fromName = None
 
-mw.addonManager.setConfigUpdatedAction(__name__,update)
+
+mw.addonManager.setConfigUpdatedAction(__name__, update)
 
 fromName = None
+
+
 def getFromName(name):
     global fromName
     if fromName is None:
         fromName = dict()
         for dic in getUserOption("columns"):
-            fromName[dic["name"]]=dic
+            fromName[dic["name"]] = dic
     return fromName.get(name)
