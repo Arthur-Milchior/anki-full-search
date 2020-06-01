@@ -2,15 +2,13 @@ from anki.notes import Note
 from .config import getUserOption
 from aqt import mw
 from anki.utils import stripHTMLMedia, intTime
+from anki import hooks
 
-oldFlush = Note.flush
-
-
-def flush(note, mod=None):
-    oldFlush(note, mod)
+def flush(note):
     if not getUserOption("default", False):
-        allSearch(note, mod=mod)
+        allSearch(note)
 
+hooks.note_will_flush.append(flush)
 
 def normalSearch(note, mod=None):
     model = note._model
@@ -26,7 +24,7 @@ def applyAllNote(fun):
         fun(note)
 
 
-def allSearch(note, mod=None):
+def allSearch(note):
     model = note.model()
     sortIdx = note.col.models.sortIdx(model)
     fields = note.fields
@@ -40,15 +38,11 @@ def allSearch(note, mod=None):
         firstField = []
     sfields = firstField + sfields
     sfield = " ".join(sfields)
-    changeSfield(note, sfield, mod)
+    changeSfield(note, sfield)
 
 
-def changeSfield(note, sfld, mod=None):
+def changeSfield(note, sfld):
     col = note.col
     usn = note.col.usn()
-    mod = mod if mod else intTime()
     col.db.execute(
-        """update notes set sfld = ?, mod = ? where id = ?""", sfld, mod, note.id)
-
-
-Note.flush = flush
+        """update notes set sfld = ? where id = ?""", sfld, note.id)
