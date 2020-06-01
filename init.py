@@ -1,4 +1,3 @@
-from anki.notes import Note
 from .config import getUserOption
 from aqt import mw
 from anki.utils import stripHTMLMedia, intTime
@@ -19,8 +18,8 @@ def normalSearch(note, mod=None):
 
 
 def applyAllNote(fun):
-    for nid in mw.col.db.list("select id from notes"):
-        note = Note(mw.col, id=nid)
+    for nid in mw.col.find_notes(""):
+        note = mw.col.getNote(id=nid)
         fun(note)
 
 
