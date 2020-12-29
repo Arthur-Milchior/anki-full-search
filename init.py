@@ -1,6 +1,7 @@
 from anki import hooks
 from anki.utils import intTime, stripHTMLMedia
 from aqt import mw
+import re
 
 from .config import getUserOption
 
@@ -44,5 +45,8 @@ def allSearch(note):
 def changeSfield(note, sfld):
     col = note.col
     usn = note.col.usn()
+    sfld = re.sub('{{c\d+::', '', sfld)
+    sfld = re.sub('}}', '', sfld)
+    sfld = re.sub('::', '', sfld)
     col.db.execute(
         """update notes set sfld = ? where id = ?""", sfld, note.id)
