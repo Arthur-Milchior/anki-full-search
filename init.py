@@ -1,6 +1,7 @@
 from anki import hooks
 from anki.utils import intTime, stripHTMLMedia
 from aqt import mw
+import re
 
 from .config import getUserOption
 
@@ -44,5 +45,14 @@ def allSearch(note):
 def changeSfield(note, sfld):
     col = note.col
     usn = note.col.usn()
+
+    # remove cloze while keeping hints at the end :
+    clozreg = re.compile("{{c\d+::.*}}")
+    if clozreg.search(sfld) :
+        string_wo_begin = re.sub("{{c\d+::", "",  sfld)
+        only_hints = re.findall("::(.*?)}}",string_wo_begin)
+        wo_hints = re.sub("{{c\d+::(.*?)(::(.*?))*?}}(.*?)*?", "\\1\\4",  sfld)
+        sfld = wo_hints + " " + ' '.join(only_hints)    
+    
     col.db.execute(
         """update notes set sfld = ? where id = ?""", sfld, note.id)
