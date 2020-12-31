@@ -45,8 +45,13 @@ def allSearch(note):
 def changeSfield(note, sfld):
     col = note.col
     usn = note.col.usn()
-    sfld = re.sub('{{c\d+::', '', sfld)
-    sfld = re.sub('}}', '', sfld)
-    sfld = re.sub('::', '', sfld)
+
+    # remove cloze while keeping hints at the end :
+    string_wo_begin = re.sub("{{c\d+::", "",  sfld)
+    only_hints = re.findall("::(.*?)}}",string_wo_begin)
+    wo_hints = re.sub("{{c\d+::(.*?)(::(.*?))*?}}(.*?)*?", "\\1\\4",  sfld)
+
+    sfld = wo_hints + " " + ' '.join(only_hints)    
+    
     col.db.execute(
         """update notes set sfld = ? where id = ?""", sfld, note.id)
