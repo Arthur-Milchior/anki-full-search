@@ -47,11 +47,12 @@ def changeSfield(note, sfld):
     usn = note.col.usn()
 
     # remove cloze while keeping hints at the end :
-    string_wo_begin = re.sub("{{c\d+::", "",  sfld)
-    only_hints = re.findall("::(.*?)}}",string_wo_begin)
-    wo_hints = re.sub("{{c\d+::(.*?)(::(.*?))*?}}(.*?)*?", "\\1\\4",  sfld)
-
-    sfld = wo_hints + " " + ' '.join(only_hints)    
+    clozreg = re.compile("{{c\d+::.*}}")
+    if clozreg.search(sfld) :
+        string_wo_begin = re.sub("{{c\d+::", "",  sfld)
+        only_hints = re.findall("::(.*?)}}",string_wo_begin)
+        wo_hints = re.sub("{{c\d+::(.*?)(::(.*?))*?}}(.*?)*?", "\\1\\4",  sfld)
+        sfld = wo_hints + " " + ' '.join(only_hints)    
     
     col.db.execute(
         """update notes set sfld = ? where id = ?""", sfld, note.id)
