@@ -25,7 +25,7 @@ def applyAllNote(fun):
 
 
 def allSearch(note):
-    model = note.model()
+    model = note.note_type()
     sortIdx = note.col.models.sortIdx(model)
     fields = note.fields
     allfields = [stripHTMLMedia(field) for field in fields]
