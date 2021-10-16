@@ -1,6 +1,5 @@
-from aqt import mw
 from aqt.qt import QAction
-
+from aqt import mw
 from .init import *
 
 action = QAction(mw)

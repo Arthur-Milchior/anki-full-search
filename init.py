@@ -1,8 +1,7 @@
-from anki import hooks
-from anki.utils import intTime, stripHTMLMedia
-from aqt import mw
-
 from .config import getUserOption
+from aqt import mw
+from anki.utils import stripHTMLMedia, intTime
+from anki import hooks
 
 def flush(note):
     if not getUserOption("default", False):
